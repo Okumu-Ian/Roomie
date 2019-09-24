@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/authentication_bg"
+    tools:context=".Profile">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile_details"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_marginBottom="10dip"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:layout_marginTop="50dip"
+        android:textColor="@android:color/black"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginStart="15dip"
+        android:layout_marginEnd="15dip">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/full_name"
+            android:id="@+id/edt_profile_full_name"
+            android:inputType="textPersonName"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginStart="15dip"
+        android:layout_marginEnd="15dip">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/registered_email"
+            android:text="@string/user_email_com"
+            android:id="@+id/edt_profile_email"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        app:passwordToggleEnabled="true"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginStart="15dip"
+        android:layout_marginEnd="15dip">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password_here"
+            android:hint="@string/password"
+            android:id="@+id/edt_profile_password"
+            android:inputType="textPassword"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="5dip"
+            android:background="@color/colorPrimary"
+            android:text="@string/update_information"
+            android:textSize="17sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:id="@+id/btn_profile_update"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="5dip"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dip">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Houses you have uploaded"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/user_listings"
+        android:padding="5dip"
+        android:layout_marginTop="25dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="15dip"
+            android:src="@drawable/ic_add"
+            android:id="@+id/fab_add_house"
+            android:tint="@android:color/white"/>
+
+    </FrameLayout>
+
+</LinearLayout>

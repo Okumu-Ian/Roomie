@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/authentication_bg"
+    android:gravity="center">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:src="@drawable/app_logo"
+        android:padding="5dip"
+        android:layout_marginBottom="-2.5dip"
+        app:civ_border_color="@android:color/white"
+        app:civ_border_width="2.5dip"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:text="@string/welcome_back"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginBottom="-2.5dip"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        android:text="@string/roommate_awaits"
+        android:textStyle="italic|bold"
+        android:textSize="17sp"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginStart="15dip"
+        android:layout_marginEnd="15dip">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email_address"
+            android:id="@+id/edt_login_email"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginStart="15dip"
+        app:passwordToggleEnabled="true"
+        android:layout_marginEnd="15dip">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_password"
+            android:id="@+id/edt_login_password"
+            android:inputType="textPassword"
+            android:layout_marginTop="5dip"
+            android:layout_marginBottom="5dip"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dip"
+        android:layout_marginEnd="15dip"
+        android:padding="10dip"
+        android:background="@color/colorAccent"
+        android:layout_marginTop="5dip"
+        android:text="@string/login"
+        android:textColor="@android:color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:id="@+id/btn_login"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dip"
+        android:layout_marginEnd="15dip"
+        android:layout_marginStart="15dip"
+        android:padding="5dip"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:text="@string/new_here_create_account"
+        android:id="@+id/txt_go_to_register"/>
+
+
+</LinearLayout>

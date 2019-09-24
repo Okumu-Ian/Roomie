@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Roomie</string>
+    <string name="email_address">Enter your email address</string>
+    <string name="create_a_password">Create a password</string>
+    <string name="create_account">Create Account</string>
+    <string name="existing_account">Already have an account? Login</string>
+    <string name="welcome_message">Hey there, Welcome</string>
+    <string name="roommate_logo">Find A Roommate</string>
+    <string name="welcome_back">Nice to have you back</string>
+    <string name="roommate_awaits">Your roommate awaits</string>
+    <string name="login_password">Enter your password</string>
+    <string name="login">Login</string>
+    <string name="new_here_create_account">New here? Create Account</string>
+    <string name="title_here">Title Here</string>
+    <string name="house_desc">House Description: Joyma Apartment description here.</string>
+    <string name="house_title">House Name: Joyma Apartment</string>
+    <string name="comment">Comment</string>
+    <string name="comment_">COMMENT ON THIS HOUSE</string>
+    <string name="comment_section">Comment Section</string>
+    <string name="user_email_com">user@email.com</string>
+    <string name="long_text_here">long text here</string>
+    <string name="password_here">password_here</string>
+    <string name="password">Password</string>
+    <string name="registered_email">Registered Email</string>
+    <string name="full_name">Full Name</string>
+    <string name="profile_details">Profile Details</string>
+    <string name="what_are_your_thoughts">What are your thoughts?</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="submit">Submit</string>
+    <string name="logout">Logout</string>
+    <string name="update_information">UPDATE INFORMATION</string>
+    <string name="house_name">House Name</string>
+    <string name="upload">UPLOAD</string>
+    <string name="select_image">SELECT IMAGE</string>
+    <string name="email_email_dot_com">email@email.dot.com</string>
+</resources>
