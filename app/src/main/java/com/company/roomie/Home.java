@@ -2,17 +2,24 @@ package com.company.roomie;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -44,7 +51,12 @@ public class Home extends AppCompatActivity {
     private Context mCtx;
     private FloatingActionButton fab;
     private UserSession session;
-    private LinearLayout layout;
+    private LinearLayout layout,filter_layout;
+    private AppCompatSpinner min, max;
+    private AppCompatButton filterButton;
+    private AppCompatSeekBar seekBar;
+    private AppCompatTextView range_txt;
+    int progressValue = 0 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +73,13 @@ public class Home extends AppCompatActivity {
         recyclerView = findViewById(R.id.roomies_list);
         fab = findViewById(R.id.fab_favourites);
         layout = findViewById(R.id.nothing);
+        filterButton = findViewById(R.id.btn_filter);
+        filter_layout = findViewById(R.id.filter_layout);
+        seekBar = findViewById(R.id.price_seek_bar);
+        range_txt = findViewById(R.id.text_value);
+
+        fetchMax();
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,8 +91,33 @@ public class Home extends AppCompatActivity {
         GridLayoutManager manager = new GridLayoutManager(mCtx,2);
         recyclerView.setLayoutManager(manager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        fetchHouses();
+        fetchHouses(0, Integer.MAX_VALUE);
 
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                progressValue = i;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                range_txt.setText(("0" + " - " +(progressValue) + (" $/Month")));
+            }
+        });
+
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                houses.clear();
+                fetchHouses(0,seekBar.getProgress());
+                Toast.makeText(mCtx, ""+progressValue, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -107,7 +151,46 @@ public class Home extends AppCompatActivity {
         return true;
     }
 
-    private void fetchHouses(){
+    private void fetchMax(){
+        String url = "https://icelabs-eeyan.com/roomie/fetch_houses.php";
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject object = new JSONObject(response);
+                    String max = object.getString("Max");
+                    String min = object.getString("Min");
+
+                    seekBar.setMax(Integer.parseInt(max));
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        seekBar.setMin((int) Double.parseDouble(min));
+                    }
+                     range_txt.setText(("0" + " - " +(seekBar.getMax()) + (" $/Month")));
+
+                }catch (JSONException ex){
+                    ex.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> map= new HashMap<>();
+                map.put("apicall","minmax");
+                return map;
+            }
+        };
+        Volley.newRequestQueue(mCtx).add(request);
+    }
+
+    private void fetchHouses(final int min, final int max){
+
         String url = "https://icelabs-eeyan.com/roomie/fetch_houses.php";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -149,6 +232,8 @@ public class Home extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> map= new HashMap<>();
                 map.put("apicall","fetchAllHouses");
+                map.put("min",String.valueOf(min));
+                map.put("max",String.valueOf(max));
                 return map;
             }
         };
@@ -170,6 +255,6 @@ public class Home extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         houses.clear();
-        fetchHouses();
+        fetchHouses(0,Integer.MAX_VALUE);
     }
 }

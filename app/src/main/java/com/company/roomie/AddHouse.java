@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -128,7 +129,11 @@ public class AddHouse extends AppCompatActivity {
     }
 
     private void uploadBitmap(final Bitmap bitmap) {
-
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("Please Wait...");
+        dialog.show();
         final UserSession session = new UserSession(this);
         String url = "https://icelabs-eeyan.com/roomie/fetch_houses.php";
         //our custom volley request
@@ -139,6 +144,7 @@ public class AddHouse extends AppCompatActivity {
                         try {
                             //Toast.makeText(AddHouse.this, new Ststrearing(response.data), Toast.LENGTH_SHORT).show();
                             JSONObject obj = new JSONObject(new String(response.data));
+                            dialog.dismiss();
                             Toast.makeText(getApplicationContext(), obj.getString("Message"), Toast.LENGTH_SHORT).show();
                             name.setText("");
                             price.setText("");
@@ -169,6 +175,7 @@ public class AddHouse extends AppCompatActivity {
                 params.put("user_email",session.getUserEmail());
                 params.put("house_name",name.getText().toString());
                 params.put("house_description",desc.getText().toString());
+                params.put("house_price",price.getText().toString());
                 params.put("apicall","upload");
                 return params;
             }

@@ -8,11 +8,61 @@
     android:background="@color/authentication_bg"
     tools:context=".Home">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:id="@+id/filter_layout"
+        android:padding="5dip">
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="5dip"
+            android:orientation="vertical"
+            android:layout_margin="5dip">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0 - 5000 $/Month"
+                android:id="@+id/text_value"
+                android:layout_marginBottom="5dip"
+                android:fontFamily="@font/roboto_black"
+                />
+
+       <androidx.appcompat.widget.AppCompatSeekBar
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/price_seek_bar"/>
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="@string/filter"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textSize="17sp"
+            android:padding="5dip"
+            android:layout_margin="5dip"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/roboto_bolditalic"
+            android:id="@+id/btn_filter"/>
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="5dip"
-        android:id="@+id/roomies_list"/>
+        android:id="@+id/roomies_list"
+        android:layout_below="@id/filter_layout"
+        android:layout_marginTop="5dip"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

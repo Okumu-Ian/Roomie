@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -171,16 +172,23 @@ public class HouseActivity extends AppCompatActivity {
     }
 
     private void addComments(final String comment){
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("Commenting...");
+        dialog.show();
         String url = "http://icelabs-eeyan.com/roomie/fetch_houses.php";
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                dialog.dismiss();
+                comments.clear();
+                fetchComments(house.getHouse_id());
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                dialog.dismiss();
                 Toast.makeText(HouseActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
 
             }

@@ -33,4 +33,20 @@
     <string name="upload">UPLOAD</string>
     <string name="select_image">SELECT IMAGE</string>
     <string name="email_email_dot_com">email@email.dot.com</string>
+    <string name="filter">Filter Price</string>
+    <string-array name="min_filter">
+        <item>Min</item>
+        <item>0</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
+
+    <string-array name="max_filter">
+        <item>Max</item>
+        <item>0</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
 </resources>
