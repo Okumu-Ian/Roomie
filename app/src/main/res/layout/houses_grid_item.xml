@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="185dip"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dip"
     app:cardCornerRadius="@dimen/cardview_default_radius"
@@ -30,6 +30,17 @@
             android:fontFamily="Roboto-Black"
             android:textColor="@android:color/black"
             android:id="@+id/txt_house_grid_title"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/title_here"
+            android:padding="5dip"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/roboto_regular"
+            android:id="@+id/txt_house_grid_price"/>
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

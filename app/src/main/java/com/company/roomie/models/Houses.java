@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Houses implements Serializable {
 
-    private String house_id, house_title, house_description, house_type, user_id, house_banner;
+    private String house_id, house_title, house_description, house_type, user_id, house_banner,house_price;
     private String [] house_images;
 
     public Houses() {
@@ -12,6 +12,14 @@ public class Houses implements Serializable {
 
     public String getHouse_id() {
         return house_id;
+    }
+
+    public String getHouse_price() {
+        return house_price;
+    }
+
+    public void setHouse_price(String house_price) {
+        this.house_price = house_price;
     }
 
     public void setHouse_id(String house_id) {

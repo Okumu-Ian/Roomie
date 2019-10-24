@@ -35,10 +35,15 @@
                 android:fontFamily="@font/roboto_black"
                 />
 
-       <androidx.appcompat.widget.AppCompatSeekBar
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:id="@+id/price_seek_bar"/>
+            <it.sephiroth.android.library.rangeseekbar.RangeSeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/price_range_bar"
+                app:range_progress_endValue="60"
+                app:range_progress_startEnd_minDiff="1"
+                app:range_progress_startValue="50"
+                style="@style/Base.Sephiroth.Widget.RangeSeekBar"/>
+
         </LinearLayout>
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="0dp"

@@ -45,7 +45,7 @@ import java.util.Map;
 public class HouseActivity extends AppCompatActivity {
 
     private AppCompatImageView banner;
-    private AppCompatTextView txt_title, txt_description, txt_email;
+    private AppCompatTextView txt_title, txt_description, txt_email,txt_price;
     private MaterialButton button;
     private FloatingActionButton fab;
     private Intent intent;
@@ -70,6 +70,7 @@ public class HouseActivity extends AppCompatActivity {
         comments_list = findViewById(R.id.house_comment_list);
         fab = findViewById(R.id.fab_favourite);
         txt_email =findViewById(R.id.txt_house_email);
+        txt_price = findViewById(R.id.txt_house_price);
         comments_list.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
         comments_list.setItemAnimator(new DefaultItemAnimator());
         displayDetails();
@@ -82,6 +83,7 @@ public class HouseActivity extends AppCompatActivity {
         txt_title.setText("House name: "+house.getHouse_title());
         txt_description.setText("Description: "+house.getHouse_description());
         txt_email.setText("Contact Email: "+house.getUser_id());
+        txt_price.setText("Price: $"+house.getHouse_price()+"/Month");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

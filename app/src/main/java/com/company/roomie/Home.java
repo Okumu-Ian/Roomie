@@ -43,6 +43,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import it.sephiroth.android.library.rangeseekbar.RangeSeekBar;
+
 public class Home extends AppCompatActivity {
 
     private List<Houses> houses;
@@ -56,7 +58,9 @@ public class Home extends AppCompatActivity {
     private AppCompatButton filterButton;
     private AppCompatSeekBar seekBar;
     private AppCompatTextView range_txt;
-    int progressValue = 0 ;
+    private RangeSeekBar range;
+    int progressValue = 5000 ;
+    int minValue = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +79,8 @@ public class Home extends AppCompatActivity {
         layout = findViewById(R.id.nothing);
         filterButton = findViewById(R.id.btn_filter);
         filter_layout = findViewById(R.id.filter_layout);
-        seekBar = findViewById(R.id.price_seek_bar);
         range_txt = findViewById(R.id.text_value);
-
+        range = findViewById(R.id.price_range_bar);
         fetchMax();
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -93,20 +96,21 @@ public class Home extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         fetchHouses(0, Integer.MAX_VALUE);
 
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        range.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                progressValue = i;
+            public void onProgressChanged(RangeSeekBar rangeSeekBar, int i, int i1, boolean b) {
+                minValue = i;
+                progressValue = i1;
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+            public void onStartTrackingTouch(RangeSeekBar rangeSeekBar) {
 
             }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                range_txt.setText(("0" + " - " +(progressValue) + (" $/Month")));
+            public void onStopTrackingTouch(RangeSeekBar rangeSeekBar) {
+                range_txt.setText(((minValue) + " - " +(progressValue) + (" $/Month")));
             }
         });
 
@@ -114,7 +118,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 houses.clear();
-                fetchHouses(0,seekBar.getProgress());
+                fetchHouses(range.getProgressStart(),range.getProgressEnd());
                 Toast.makeText(mCtx, ""+progressValue, Toast.LENGTH_SHORT).show();
             }
         });
@@ -162,11 +166,8 @@ public class Home extends AppCompatActivity {
                     String max = object.getString("Max");
                     String min = object.getString("Min");
 
-                    seekBar.setMax(Integer.parseInt(max));
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        seekBar.setMin((int) Double.parseDouble(min));
-                    }
-                     range_txt.setText(("0" + " - " +(seekBar.getMax()) + (" $/Month")));
+                    range.setMax(Integer.parseInt(max));
+                    range_txt.setText(("0" + " - " +(range.getMax()) + (" $/Month")));
 
                 }catch (JSONException ex){
                     ex.printStackTrace();
@@ -211,6 +212,7 @@ public class Home extends AppCompatActivity {
                         house.setHouse_id(object.getString("house_id"));
                         house.setHouse_title(object.getString("house_name"));
                         house.setUser_id(object.getString("user_email"));
+                        house.setHouse_price(object.getString("house_price"));
                         houses.add(house);
                     }
 

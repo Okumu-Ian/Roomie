@@ -24,12 +24,13 @@ public class HousesAdapter  extends RecyclerView.Adapter<HousesAdapter.HouseHold
     class HouseHolder extends RecyclerView.ViewHolder{
 
         private AppCompatImageView imageBanner;
-        private AppCompatTextView houseTitle;
+        private AppCompatTextView houseTitle,housePrice;
 
         HouseHolder(@NonNull View itemView) {
             super(itemView);
             imageBanner = itemView.findViewById(R.id.img_house_grid);
             houseTitle = itemView.findViewById(R.id.txt_house_grid_title);
+            housePrice = itemView.findViewById(R.id.txt_house_grid_price);
         }
     }
 
@@ -60,6 +61,7 @@ public class HousesAdapter  extends RecyclerView.Adapter<HousesAdapter.HouseHold
                 mContext.startActivity(mIntent);
             }
         });
+        holder.housePrice.setText("Price: $"+mHouse.getHouse_price());
     }
 
     @Override
